@@ -13,12 +13,21 @@
     <div class="container">
     <div class="row">
         <div class="col">
-        <h1>All Animals</h1>
+        <h1>Edit</h1>
         <div class="">
-            <% for ( var i in data ) { %>
+        <form class="" action="/<%= animal.id %>" method="post">
+            <label for="">Name:</label>
+            <input type="text" name="name" value="<%= animal.name %>">
+            <label for="">Weight:</label>
+            <input type="text" name="weight" value="<%= animal.weight %>">
+            <label for="">Color:</label>
+            <input type="text" name="color" value="<%= animal.color %>"><br>
+            <input type="submit" name="" value="Update">
+        </form>
+        <form class="" action="/<%= animal.id %>/remove" method="post">
+            <input type="submit" name="" value="Delete">
 
-            <h3> <a href="<%= data[i]._id %>"> <%= data[i].name %></h3></a>
-            <% } %>
+        </form>
 
 
         </div>

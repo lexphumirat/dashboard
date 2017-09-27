@@ -52,11 +52,56 @@ app.get('/showall', function(request, response){
 })
 
 app.get('/:id', function(req, res){
-  Animal.find({ _id: req.params.id }, function(err, response) {
+    console.log('showing something');
+  Animal.findById( req.params.id , function(err, animal) {
     if (err) { console.log(err); }
-    res.render('showall', { data: response[0] });
+    res.render('edit', { animal: animal });
+    // res.send(animal);
   });
 });
 
+app.post('/:id', function(req, res){
+    console.log('updating something');
+  Animal.update({ _id: req.params.id }, req.body, function(err, animal){
+    if (err) { console.log(err); }
+    res.redirect('/');
+  });
+});
+
+
+app.post('/:id/remove', function(req, res){
+    console.log('deleteing something');
+  Animal.remove({ _id: req.params.id }, function(err, animal){
+    if (err) { console.log(err); }
+    res.redirect('/');
+  });
+});
+
+
+// app.post('/:id', function(req, res){
+//     console.log('update something');
+//   Animal.findById( req.params.id , function(err, animal) {
+//     animal.id = req.params.id
+//     if (err) { console.log(err);
+//     } else {
+//         console.log('about to save');
+//         animal.save(function(err){
+//             res.render('index', { animal: animal });
+//         });
+//     }
+//
+//     // res.send(animal);
+//   });
+// });
+
+
+
+// app.post('/:id', function(request, response){
+//     console.log('update something');
+//     Animal.update({_id: req.params.id }, request.body, function(err, animal){
+//         if (err) { console.log(err);}
+//         res.render('/',{ animal: animal});
+//     });
+// });
 
 app.listen(port, () => console.log('listen on port 8000 ${ port }'));
